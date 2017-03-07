@@ -594,9 +594,9 @@
 	 * the plugin is destroyed.
 	 */
 	Kwick.prototype.addEventHandler = function($el, eventName, handler) {
-		$el.on(eventName, handler);
+		$el.on(eventName, null /*selector*/, null /*data*/, handler);
 		this.onDestroy(function() {
-			$el.off(eventName, handler);
+			$el.off(eventName, null /*selector*/ ,handler);
 		});
 	};
 
@@ -610,6 +610,7 @@
 	 */
 	Kwick.prototype.destroy = function() {
 		this.$timer.stop();
+
 		for (var i = 0, len = this.onDestroyHandlers.length; i < len; i++) {
 			this.onDestroyHandlers[i]();
 		}
